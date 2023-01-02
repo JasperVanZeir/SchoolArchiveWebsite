@@ -50,7 +50,7 @@ function createVouchElement(leerling) {
     </td>
     <td>
        <div class="pr-4">
-          <button class="mt-4 sm:mt-0 inline-flex items-start justify-start py-3 px-8 rounded-lg float-right">
+          <button id="editLeerlingButton" data-modal-toggle="editLeerling" class="mt-4 sm:mt-0 inline-flex items-start justify-start py-3 px-8 rounded-lg float-right">
              <p class="customcolorblue">Edit</p>
           </button>
        </div>

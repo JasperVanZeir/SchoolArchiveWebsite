@@ -92,3 +92,23 @@
     border: 2px solid #6347ff;
 }
 
+.customborderred{
+    border: 2px solid #ff441f;
+}
+
+.bgCustomRed{
+    background-color: #fff;
+}
+
+.bgCustomRed:hover{
+    background-color: #ff441f;
+}
+
+.CustomRed{
+    color: #ff441f;
+}
+
+.CustomRed:hover{
+    color: #fff;
+}
+
