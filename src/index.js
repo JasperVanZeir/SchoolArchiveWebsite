@@ -5,52 +5,52 @@ function elementFromHtml(html) {
     return template.content.firstElementChild;
 }
 
-function loadVouches(endpoint) {
+function loadStudents(endpoint) {
     removeContent();
     fetch(`http://104.131.62.197/${endpoint}`)
         .then((response) => response.json())
         .then((data) => {
-            fetch("http://104.131.62.197/api/leerlingen/count")
+            fetch("http://104.131.62.197/api/students/count")
                 .then((response) => response.json())
                 .then((rcount) => {
-                    appendVouches(rcount, data);
+                    appendStudents(rcount, data);
                 });
         });
 }
 
 
-function createVouchElement(leerling) {
-    const className = leerling.leerling_id % 2 == 0 ? "change_c" : "";
+function createStudentElement(student) {
+    const className = student.student_id % 2 == 0 ? "change_c" : "";
 
-    return `<tr class="focus:outline-none h-14 border border-gray-100 text-gray-500 text-md font-medium hover:text-gray-800 hover:bg-gray-50">
+    return `<tr class="focus:outline-none h-14 bg-white border border-gray-100 text-gray-500 text-md font-medium hover:text-gray-800 hover:bg-gray-50">
     <td>
        <div class="flex items-center pl-5">
-          <p class="ml-2">${leerling.voornaam} ${leerling.achternaam}</p>
+          <p>${student.first_name} ${student.last_name}</p>
        </div>
     </td>
     <td class="pl-24">
        <div class="flex items-center">
-          <p class="ml-2">${leerling.email}</p>
+          <p class="ml-2">${student.email}</p>
        </div>
     </td>
     <td class="pl-5">
        <div class="flex items-center">
-          <p class="ml-2">${leerling.richting}</p>
+          <p class="ml-2">${student.course}</p>
        </div>
     </td>
     <td class="pl-5">
        <div class="flex items-center">
-          <p class="ml-2">${leerling.geslacht}</p>
+          <p class="ml-2">${student.sex}</p>
        </div>
     </td>
     <td class="pl-5">
        <div class="flex items-center">
-          <p class="ml-2">${leerling.geboortejaar}</p>
+          <p class="ml-2">${student.birthyear}</p>
        </div>
     </td>
     <td>
        <div class="pr-4">
-          <button id="editLeerlingButton" data-modal-toggle="editLeerling" class="mt-4 sm:mt-0 inline-flex items-start justify-start py-3 px-8 rounded-lg float-right">
+          <button id="editstudentButton" data-modal-toggle="editstudent" class="mt-4 sm:mt-0 inline-flex items-start justify-start py-3 px-8 rounded-lg float-right">
              <p class="customcolorblue">Edit</p>
           </button>
        </div>
@@ -59,8 +59,8 @@ function createVouchElement(leerling) {
     `;
 }
 
-function appendVouches(rcount, { count, leerlingen }) {
-    document.getElementById("leerlingCount").innerHTML = rcount.totalcount;
+function appendStudents(rcount, { count, students }) {
+    document.getElementById("StudentCount").innerHTML = rcount.totalcount;
     document.getElementById("AITCount").innerHTML = rcount.AIT;
     document.getElementById("ITNCount").innerHTML = rcount.ITN;
     document.getElementById("MOCount").innerHTML = rcount.MO;
@@ -68,19 +68,19 @@ function appendVouches(rcount, { count, leerlingen }) {
 
     const tableBody = document.getElementById("tbody");
 
-    for (const leerling of leerlingen) {
-        const leerlingElement = createVouchElement(leerling);
-        tableBody.appendChild(elementFromHtml(leerlingElement));
+    for (const student of students) {
+        const studentElement = createStudentElement(student);
+        tableBody.appendChild(elementFromHtml(studentElement));
     }
 }
 
 function reverseTable() {
-    const vouches = document.querySelectorAll(".vouch");
+    const students = document.querySelectorAll(".student");
 
-    vouches.forEach((vouch) => vouch.remove());
-    vouchesData.vouches.reverse();
+    students.forEach((student) => student.remove());
+    studentsData.students.reverse();
 
-    appendVouches(vouchesData);
+    appendStudents(studentsData);
 }
 
 function removeContent() {
@@ -89,4 +89,4 @@ function removeContent() {
     tableBody.innerHTML = "";
 }
 
-loadVouches("api/leerlingen");
+loadStudents("api/students");
