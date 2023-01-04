@@ -1,21 +1,21 @@
 function elementFromHtml(html) {
-    const template = document.createElement("template");
-    template.innerHTML = html.trim();
+   const template = document.createElement("template");
+   template.innerHTML = html.trim();
 
-    return template.content.firstElementChild;
+   return template.content.firstElementChild;
 }
 
 function loadStudents(endpoint) {
-    removeContent();
-    fetch(`http://104.131.62.197/${endpoint}`)
-        .then((response) => response.json())
-        .then((data) => {
-            fetch("http://104.131.62.197/api/students/count")
-                .then((response) => response.json())
-                .then((rcount) => {
-                    appendStudents(rcount, data);
-                });
-        });
+   removeContent();
+   fetch(`http://104.131.62.197/${endpoint}`)
+      .then((response) => response.json())
+      .then((data) => {
+         fetch("http://104.131.62.197/api/students/count")
+            .then((response) => response.json())
+            .then((rcount) => {
+               appendStudents(rcount, data);
+            });
+      });
 }
 
 
@@ -50,7 +50,7 @@ function createStudentElement(student) {
     </td>
     <td>
        <div class="pr-4">
-          <button onclick="editStudentButton()" class="mt-4 sm:mt-0 inline-flex items-start justify-start py-3 px-8 rounded-lg float-right">
+          <button onclick="editStudentButton(event)" class="mt-4 sm:mt-0 inline-flex items-start justify-start py-3 px-8 rounded-lg float-right">
              <p class="customcolorblue">Edit</p>
           </button>
        </div>
@@ -59,41 +59,56 @@ function createStudentElement(student) {
     `;
 }
 
-function editStudentButton() {
+
+function test() {
+   console.log("test");
+}
+
+function editStudentButton(event) {
    const addStudentModal = document.getElementById("editStudent");
    addStudentModal.classList.remove("hidden");
    addStudentModal.classList.add("flex");
+
+   // find the row the edit button was clicked on and log it
+   console.log(event)
+   const row = event.target.parentNode;
+
+   // find the student name from the row
+   const studentName = row.parentNode.parentNode.childNodes[0].childNodes[0].childNodes[0].childNodes[0].innerHTML;
+   console.log(studentName);
+
+
 }
 
 
 function appendStudents(rcount, { count, students }) {
-    document.getElementById("StudentCount").innerHTML = rcount.totalcount;
-    document.getElementById("AITCount").innerHTML = rcount.AIT;
-    document.getElementById("ITNCount").innerHTML = rcount.ITN;
-    document.getElementById("MOCount").innerHTML = rcount.MO;
-    document.getElementById("OMCCount").innerHTML = rcount.OMC;
+   document.getElementById("StudentCount").innerHTML = rcount.totalcount;
+   document.getElementById("AITCount").innerHTML = rcount.AIT;
+   document.getElementById("ITNCount").innerHTML = rcount.ITN;
+   document.getElementById("MOCount").innerHTML = rcount.MO;
+   document.getElementById("OMCCount").innerHTML = rcount.OMC;
 
-    const tableBody = document.getElementById("tbody");
+   const tableBody = document.getElementById("tbody");
 
-    for (const student of students) {
-        const studentElement = createStudentElement(student);
-        tableBody.appendChild(elementFromHtml(studentElement));
-    }
+   for (const student of students) {
+      const studentElement = createStudentElement(student);
+      tableBody.appendChild(elementFromHtml(studentElement));
+   }
 }
 
 function reverseTable() {
-    const students = document.querySelectorAll(".student");
+   const students = document.querySelectorAll(".student");
 
-    students.forEach((student) => student.remove());
-    studentsData.students.reverse();
+   students.forEach((student) => student.remove());
+   studentsData.students.reverse();
 
-    appendStudents(studentsData);
+   appendStudents(studentsData);
 }
 
 function removeContent() {
-    // remove all content from the table
-    const tableBody = document.getElementById("tbody");
-    tableBody.innerHTML = "";
+   // remove all content from the table
+   const tableBody = document.getElementById("tbody");
+   tableBody.innerHTML = "";
 }
 
 loadStudents("api/students");
