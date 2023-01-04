@@ -21,6 +21,14 @@ function loadStudents(endpoint) {
 
 function createStudentElement(student) {
 
+   // create a test json object
+   const test1 = {
+      "first_name": "test",
+      "last_name": "test"
+   }
+   console.log(JSON.stringify(test1));
+
+
    return `<tr class="focus:outline-none h-14 bg-white border border-gray-100 text-gray-500 text-md font-medium hover:text-gray-800 hover:bg-gray-50">
    
     <td>
@@ -50,7 +58,7 @@ function createStudentElement(student) {
     </td>
     <td>
        <div class="pr-4">
-          <button onclick="editStudentButton(event)" class="mt-4 sm:mt-0 inline-flex items-start justify-start py-3 px-8 rounded-lg float-right">
+          <button onclick="editStudentButton(this)" data-student="${JSON.stringify(test1)}" class="mt-4 sm:mt-0 inline-flex items-start justify-start py-3 px-8 rounded-lg float-right">
              <p class="customcolorblue">Edit</p>
           </button>
        </div>
@@ -64,19 +72,14 @@ function test() {
    console.log("test");
 }
 
-function editStudentButton(event) {
+function editStudentButton(data) {
+   console.log(data)
    const addStudentModal = document.getElementById("editStudent");
    addStudentModal.classList.remove("hidden");
    addStudentModal.classList.add("flex");
 
-   // find the row the edit button was clicked on and log it
-   console.log(event)
-   const row = event.target.parentNode;
-
-   // find the student name from the row
-   const studentName = row.parentNode.parentNode.childNodes[0].childNodes[0].childNodes[0].childNodes[0].innerHTML;
-   console.log(studentName);
-
+   const student = JSON.parse(data.getAttribute("data-student"));
+   console.log(student);
 
 }
 
