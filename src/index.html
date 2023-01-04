@@ -166,7 +166,7 @@
                         </div>
                      </div>
                      <div class="flex flex-col justify-between p-1 pl-5 leading-normal">
-                        <p id="leerlingCount" class="text-2xl font-semibold text-gray-700 dark:text-gray-400 pt-3">??</p>
+                        <p id="StudentCount" class="text-2xl font-semibold text-gray-700 dark:text-gray-400 pt-3">??</p>
                         <h5 class="mb-2 text-md font-medium tracking-tight text-gray-500 dark:text-white">Totaal Leerlingen</h5>
                      </div>
                   </a>
@@ -245,10 +245,10 @@
                <div class="pl-6 w-full">
                   <div class="py-4 md:py-7">
                      <div class="flex items-center justify-between">
-                        <p tabindex="0" class="pt-6 font-semibold text-xl text-gray-700 capitalize font-poppins tracking-wide">Leerlingen</p>
-                        <div class="py-3 px-5 flex items-center text-md font-medium leading-none text-gray-500 cursor-pointer rounded">
+                        <p tabindex="0" class="font-semibold text-xl text-gray-700 capitalize font-poppins tracking-wide">Leerlingen</p>
+                        <div class="py-3 px-3 flex items-center text-md font-medium leading-none text-gray-500 cursor-pointer rounded">
                            <p class="pr-2">Sorteer Op:</p>
-                           <select aria-label="select" class=" ml-1 border-2 customborderblue rounded-lg">
+                           <select aria-label="select" class="py-1.5 ml-1 border-2 customborderblue rounded-lg">
                               <option class="text-sm text-gray-500">2022-2023</option>
                               <option class="text-sm text-gray-500">2021-2022</option>
                               <option class="text-sm text-gray-500">2020-2021</option>
@@ -256,7 +256,7 @@
                         </div>
                      </div>
                   </div>
-                  <div class="bg-white rounded-lg py-4 md:py-7 px-4 md:px-8 xl:px-10">
+                  <div class="bg-white rounded-lg py-3.5 md:py-7 px-3 md:px-8 xl:px-10">
                      <div class="sm:flex items-center justify-between font-medium">
                         <div class="flex justify-center items-center">
                            <div x-data="setup()">
@@ -264,7 +264,7 @@
                                  <template x-for="(tab, index) in tabs" :key="index">
                                     <li class="cursor-pointer py-2 px-5 rounded-lg transition ml-0 mr-4 sm:ml-8"
                                        :class="activeTab===index ? 'bgCustomtabs text-white' : 'text-gray-500 hover:bg-gray-200'"
-                                       @click="activeTab = index; loadVouches(tab === 'Totaal' ? 'api/leerlingen' : 'api/leerlingen/' + tab.toLowerCase())"
+                                       @click="activeTab = index; loadStudents(tab === 'Totaal' ? 'api/students' : 'api/students/course?&course=' + tab.toUpperCase())"
                                        x-text="tab"></li>
                                  </template>
                               </ul>
@@ -285,16 +285,16 @@
                            }
                            
                         </script>
-                        <button id="addLeerlingButton" data-modal-toggle="addLeerling" class="text-white inline-flex items-center bgCustomSidebarBlue hover:bg-primary-800 font-medium rounded-lg text-md px-5 py-2 text-center">
+                        <button id="addStudentButton" data-modal-toggle="addStudent" class="text-white inline-flex items-center bgCustomSidebarBlue hover:bg-primary-800 font-medium rounded-lg text-md px-5 py-2 text-center">
                            <svg class="mr-1 -ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
                            Maak leerling
                        </button>
-                       <button id="editLeerlingButton" data-modal-toggle="editLeerling" class="text-white inline-flex items-center bgCustomSidebarBlue hover:bg-primary-800 font-medium rounded-lg text-md px-5 py-2 text-center">
+                       <button id="editStudentButto" data-modal-toggle="editStudent" class="text-white inline-flex items-center bgCustomSidebarBlue hover:bg-primary-800 font-medium rounded-lg text-md px-5 py-2 text-center">
                         <svg class="mr-1 -ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
-                        Maak leerling
+                        Edit leerling
                     </button>
                      </div>
-                     <div class="mt-4 overflow-x-auto">
+                     <div class="mt-4 overflow-x-auto rounded-lg">
                         <table class="w-full whitespace-nowrap">
                            <tr tabindex="0" class="focus:outline-none h-14 bgCustomSidebar border border-gray-100">
                               <td class="">
@@ -335,9 +335,9 @@
                <script>;function dropdownFunction(n){var e=document.getElementsByClassName('dropdown-content'),t;let list=n.parentElement.parentElement.getElementsByClassName('dropdown-content')[0];list.classList.add('target');for(t=0;t<e.length;t++){if(!e[t].classList.contains('target')){e[t].classList.add('hidden')}};list.classList.toggle('hidden')};</script>
             </div>
          </div>
-        <form id="new-user-form">
+        <form id="addStudentForm">
          <!-- Main modal -->
-         <div id="addLeerling" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+         <div id="addStudent" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
             <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
                <!-- Modal content -->
                <div class="relative p-4 bg-white rounded-lg  dark:bg-gray-800 sm:p-5">
@@ -346,7 +346,7 @@
                      <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
                         Maak leerling
                      </h3>
-                     <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="addLeerling">
+                     <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="addStudent">
                         <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
                         </svg>
@@ -357,20 +357,20 @@
                   <form action="#">
                      <div class="grid gap-4 mb-4 sm:grid-cols-2">
                         <div>
-                           <label for="voornaam" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Voornaam</label>
-                           <input type="text" id="voornaam" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="John" required="">
+                           <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Voornaam</label>
+                           <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="John" required="">
                         </div>
                         <div>
-                           <label for="achternaam" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Achternaam</label>
-                           <input type="text" id="achternaam" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Doe" required="">
+                           <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Achternaam</label>
+                           <input type="text" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Doe" required="">
                         </div>
                         <div>
-                           <label for="geboortejaar" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Geboortejaar</label>
-                           <input type="text" id="geboortejaar" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="2005" required="">
+                           <label for="birthyear" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Geboortejaar</label>
+                           <input type="text" id="birthyear" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="2005" required="">
                         </div>
                         <div>
-                           <label for="richting" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Richting</label>
-                           <select type="text" id="richting" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                           <label for="course" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Richting</label>
+                           <select type="text" id="course" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                               <option selected="">Selecteer richting</option>
                               <option value="AIT">AIT</option>
                               <option value="ITN">ITN</option>
@@ -379,8 +379,8 @@
                            </select>
                         </div>
                         <div>
-                           <label for="geslacht" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Geslacht</label>
-                           <select type="text" id="geslacht" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                           <label for="sex" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Geslacht</label>
+                           <select type="text" id="sex" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                               <option selected="">Selecteer geslacht</option>
                               <option value="Man">Man</option>
                               <option value="Vrouw">Vrouw</option>
@@ -392,16 +392,16 @@
                            <input type="text" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="john.doe@mail.com" required="">
                         </div>
                         <div>
-                           <label for="telefoon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telefoon</label>
-                           <input type="text" id="telefoon" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="09 225 89 07" required="">
+                           <label for="phone_number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telefoon</label>
+                           <input type="text" id="phone_number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="09 225 89 07" required="">
                         </div>
                         <div>
-                           <label for="woonplaats" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Woonplaats</label>
-                           <input type="text" id="woonplaats" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Steendam 27, 9000 Gent" required="">
+                           <label for="city" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Woonplaats</label>
+                           <input type="text" id="city" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Steendam 27, 9000 Gent" required="">
                         </div>
                         <div class="sm:col-span-2">
-                           <label for="notitie" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Notitie</label>
-                           <textarea type="text" id="notitie" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Schrijf hier een notitie"></textarea>                    
+                           <label for="note" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Notitie</label>
+                           <textarea type="text" id="note" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Schrijf hier een notitie"></textarea>                    
                         </div>
                      </div>
                      <button type="button" id="submit-button" class="text-white inline-flex items-center bgCustomSidebarBlue hover:bg-primary-800 font-medium rounded-lg text-md px-5 py-2 text-center">
@@ -413,9 +413,9 @@
             </div>
          </div>
         </form> 
-        <form id="edit-user-form">
+        <form id="editStudentForm">
         <!-- Main modal -->
-<div id="editLeerling" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+<div id="editStudentModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
    <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
        <!-- Modal content -->
        <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
@@ -424,7 +424,7 @@
                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
                    Edit leerling
                </h3>
-               <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="editLeerling">
+               <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="editStudent">
                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                    <span class="sr-only">Close modal</span>
                </button>
@@ -433,20 +433,20 @@
            <form action="#">
             <div class="grid gap-4 mb-4 sm:grid-cols-2">
                <div>
-                  <label for="voornaam" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Voornaam</label>
-                  <input type="text" id="voornaam" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="John" required="">
+                  <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Voornaam</label>
+                  <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="John" required="">
                </div>
                <div>
-                  <label for="achternaam" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Achternaam</label>
-                  <input type="text" id="achternaam" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Doe" required="">
+                  <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Achternaam</label>
+                  <input type="text" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Doe" required="">
                </div>
                <div>
-                  <label for="geboortejaar" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Geboortejaar</label>
-                  <input type="text" id="geboortejaar" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="2005" required="">
+                  <label for="birthyear" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Geboortejaar</label>
+                  <input type="text" id="birthyear" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="2005" required="">
                </div>
                <div>
-                  <label for="richting" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Richting</label>
-                  <select type="text" id="richting" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                  <label for="course" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Richting</label>
+                  <select type="text" id="course" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                      <option selected="">Selecteer richting</option>
                      <option value="AIT">AIT</option>
                      <option value="ITN">ITN</option>
@@ -455,8 +455,8 @@
                   </select>
                </div>
                <div>
-                  <label for="geslacht" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Geslacht</label>
-                  <select type="text" id="geslacht" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                  <label for="sex" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Geslacht</label>
+                  <select type="text" id="sex" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                      <option selected="">Selecteer geslacht</option>
                      <option value="Man">Man</option>
                      <option value="Vrouw">Vrouw</option>
@@ -468,16 +468,16 @@
                   <input type="text" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="john.doe@mail.com" required="">
                </div>
                <div>
-                  <label for="telefoon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telefoon</label>
-                  <input type="text" id="telefoon" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="09 225 89 07" required="">
+                  <label for="phone_number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telefoon</label>
+                  <input type="text" id="phone_number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="09 225 89 07" required="">
                </div>
                <div>
-                  <label for="woonplaats" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Woonplaats</label>
-                  <input type="text" id="woonplaats" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Steendam 27, 9000 Gent" required="">
+                  <label for="city" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Woonplaats</label>
+                  <input type="text" id="city" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Steendam 27, 9000 Gent" required="">
                </div>
                <div class="sm:col-span-2">
-                  <label for="notitie" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Notitie</label>
-                  <textarea type="text" id="notitie" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Schrijf hier een notitie"></textarea>                    
+                  <label for="note" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Notitie</label>
+                  <textarea type="text" id="note" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Schrijf hier een notitie"></textarea>                    
                </div>
             </div>
                <div class="flex items-center space-x-4">
