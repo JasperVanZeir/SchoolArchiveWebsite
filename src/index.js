@@ -20,9 +20,9 @@ function loadStudents(endpoint) {
 
 
 function createStudentElement(student) {
-    const className = student.student_id % 2 == 0 ? "change_c" : "";
 
-    return `<tr class="focus:outline-none h-14 bg-white border border-gray-100 text-gray-500 text-md font-medium hover:text-gray-800 hover:bg-gray-50">
+   return `<tr class="focus:outline-none h-14 bg-white border border-gray-100 text-gray-500 text-md font-medium hover:text-gray-800 hover:bg-gray-50">
+   
     <td>
        <div class="flex items-center pl-5">
           <p>${student.first_name} ${student.last_name}</p>
@@ -50,7 +50,7 @@ function createStudentElement(student) {
     </td>
     <td>
        <div class="pr-4">
-          <button id="editstudentButton" data-modal-toggle="editstudent" class="mt-4 sm:mt-0 inline-flex items-start justify-start py-3 px-8 rounded-lg float-right">
+          <button onclick="editStudentButton()" class="mt-4 sm:mt-0 inline-flex items-start justify-start py-3 px-8 rounded-lg float-right">
              <p class="customcolorblue">Edit</p>
           </button>
        </div>
@@ -58,6 +58,13 @@ function createStudentElement(student) {
  </tr>
     `;
 }
+
+function editStudentButton() {
+   const addStudentModal = document.getElementById("editStudent");
+   addStudentModal.classList.remove("hidden");
+   addStudentModal.classList.add("flex");
+}
+
 
 function appendStudents(rcount, { count, students }) {
     document.getElementById("StudentCount").innerHTML = rcount.totalcount;
