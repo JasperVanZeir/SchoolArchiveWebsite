@@ -21,14 +21,6 @@ function loadStudents(endpoint) {
 
 function createStudentElement(student) {
 
-   // create a test json object
-   const test1 = {
-      "first_name": "test",
-      "last_name": "test"
-   }
-   console.log(JSON.stringify(test1));
-
-
    return `<tr class="focus:outline-none h-14 bg-white border border-gray-100 text-gray-500 text-md font-medium hover:text-gray-800 hover:bg-gray-50">
    
     <td>
@@ -58,7 +50,7 @@ function createStudentElement(student) {
     </td>
     <td>
        <div class="pr-4">
-          <button onclick="editStudentButton(this)" data-student="${JSON.stringify(test1)}" class="mt-4 sm:mt-0 inline-flex items-start justify-start py-3 px-8 rounded-lg float-right">
+          <button onclick="editStudentButton(this)" data-student='${JSON.stringify(student)}' class="mt-4 sm:mt-0 inline-flex items-start justify-start py-3 px-8 rounded-lg float-right">
              <p class="customcolorblue">Edit</p>
           </button>
        </div>
@@ -68,19 +60,29 @@ function createStudentElement(student) {
 }
 
 
-function test() {
-   console.log("test");
+
+function editStudent() {
+   console.log("testedit")
 }
 
 function editStudentButton(data) {
-   console.log(data)
+
+   // opens modal
    const addStudentModal = document.getElementById("editStudent");
    addStudentModal.classList.remove("hidden");
    addStudentModal.classList.add("flex");
 
+   // fills input fields with student data
    const student = JSON.parse(data.getAttribute("data-student"));
-   console.log(student);
-
+   document.getElementById("edit_first_name").value = student.first_name;
+   document.getElementById("edit_last_name").value = student.last_name;
+   document.getElementById("edit_course").value = student.course;
+   document.getElementById("edit_birthyear").value = student.birthyear;
+   document.getElementById("edit_sex").value = student.sex;
+   document.getElementById("edit_email").value = student.email;
+   document.getElementById("edit_phone_number").value = student.phone_number;
+   document.getElementById("edit_city").value = student.city;
+   document.getElementById("edit_note").value = student.note;
 }
 
 
