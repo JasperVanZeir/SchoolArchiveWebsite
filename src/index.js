@@ -18,50 +18,48 @@ function loadStudents(endpoint) {
       });
 }
 
-
 function createStudentElement(student) {
    return `
-     <tr class="focus:outline-none h-14 bg-white border border-gray-100 text-gray-500 text-md font-medium hover:text-gray-800 hover:bg-gray-50" onclick="viewStudentButton(this)">
-    <td>
-       <div class="flex items-center pl-5">
-          <p>${student.first_name} ${student.last_name}</p>
-       </div>
-    </td>
-    <td class="pl-24">
-       <div class="flex items-center">
-          <p class="ml-2">${student.email}</p>
-       </div>
-    </td>
-    <td class="pl-5">
-       <div class="flex items-center">
-          <p class="ml-2">${student.course}</p>
-       </div>
-    </td>
-    <td class="pl-5">
-       <div class="flex items-center">
-          <p class="ml-2">${student.sex}</p>
-       </div>
-    </td>
-    <td class="pl-5">
-       <div class="flex items-center">
-          <p class="ml-2">${student.birthyear}</p>
-       </div>
-    </td>
-    <td>
-       <div class="pr-4">
-           <button onclick="editStudentButton(this); event.stopPropagation()" data-student='${JSON.stringify(student)}' class="mt-4 sm:mt-0 inline-flex items-start justify-start py-3 px-8 rounded-lg float-right">
-             <p class="customcolorblue">Edit</p>
-          </button>
-       </div>
-    </td>
- </tr>
-    `;
+    <tr class="focus:outline-none h-14 bg-white border border-gray-100 text-gray-500 text-md font-medium hover:text-gray-800 hover:bg-gray-50" onclick="viewStudentButton(this)">
+   <td>
+      <div class="flex items-center pl-5">
+         <p>${student.first_name} ${student.last_name}</p>
+      </div>
+   </td>
+   <td class="pl-24">
+      <div class="flex items-center">
+         <p class="ml-2">${student.email}</p>
+      </div>
+   </td>
+   <td class="pl-5">
+      <div class="flex items-center">
+         <p class="ml-2">${student.course}</p>
+      </div>
+   </td>
+   <td class="pl-5">
+      <div class="flex items-center">
+         <p class="ml-2">${student.sex}</p>
+      </div>
+   </td>
+   <td class="pl-5">
+      <div class="flex items-center">
+         <p class="ml-2">${student.birthyear}</p>
+      </div>
+   </td>
+   <td>
+      <div class="pr-4">
+          <button onclick="editStudentButton(this); event.stopPropagation()" data-student='${JSON.stringify(
+      student
+   )}' class="mt-4 sm:mt-0 inline-flex items-start justify-start py-3 px-8 rounded-lg float-right">
+            <p class="customcolorblue">Edit</p>
+         </button>
+      </div>
+   </td>
+</tr>
+   `;
 }
 
-
-
 function editStudentButton(data) {
-
    // opens modal
    const addStudentModal = document.getElementById("editStudent");
    addStudentModal.classList.remove("hidden");
@@ -82,15 +80,26 @@ function editStudentButton(data) {
 }
 
 function viewStudentButton(data) {
-
    // opens modal
    const addStudentModal = document.getElementById("viewStudent");
    addStudentModal.classList.remove("hidden");
    addStudentModal.classList.add("flex");
-
 }
 
 function deleteStudent() {
+   let id = document.getElementById("edit_student_id").value;
+   fetch(`http://104.131.62.197/api/students/id/${id} `, {
+      method: "DELETE",
+   })
+      .then((data) => {
+         if (data.message == "Student deleted") {
+            loadStudents("api/students");
+            closePopup("editStudent");
+         } else {
+            alert("Something went wrong" + data.message);
+         }
+      })
+
 
 }
 
@@ -133,17 +142,21 @@ function editStudent() {
          console.log("Success:", data);
          loadStudents("api/students");
 
-         let modal = document.getElementById('editStudent');
-         // Set the modal's display property to 'none' to hide it
-         modal.classList.add("hidden");
-
+         closePopup("editStudent");
       })
       .catch((error) => {
          console.error("Error:", error);
       });
+}
 
-
-
+function closePopup(menu) {
+   if (menu == "editStudent") {
+      let modal = document.getElementById("editStudent");
+      modal.classList.add("hidden");
+   } else if (menu == "viewStudent") {
+      let modal = document.getElementById("viewStudent");
+      modal.classList.add("hidden");
+   }
 }
 
 function appendStudents(rcount, { count, students }) {

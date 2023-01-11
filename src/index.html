@@ -563,13 +563,9 @@
                      </button>
                      <script>
                         document.getElementById('closeEditModal').addEventListener('click', function () {
-                           // Get the modal element
-                           var modal = document.getElementById('editStudent');
-                           // Set the modal's display property to 'none' to hide it
-                           modal.classList.add("hidden");
-                           // clear the form
+                           closePopup("editStudent");
+                           // reset the input fields
                            document.getElementById('edit-user-form').reset();
-
                         });
                      </script>
                   </div>
@@ -665,7 +661,7 @@
                            </svg>
                            Edit leerling
                         </button>
-                        <button type="button"
+                        <button type="button" onclick="deleteStudent()"
                            class="CustomRed inline-flex items-center hover:text-white border customborderred bgCustomRed focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-md px-5 py-1.5 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
                            <svg class="mr-1 -ml-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                               xmlns="http://www.w3.org/2000/svg">
@@ -706,10 +702,7 @@
                      </button>
                      <script>
                         document.getElementById('closeViewModal').addEventListener('click', function () {
-                           // Get the modal element
-                           var modal = document.getElementById('viewStudent');
-                           // Set the modal's display property to 'none' to hide it
-                           modal.classList.add("hidden");
+                           closePopup("viewStudent")
 
                         });
                      </script>
