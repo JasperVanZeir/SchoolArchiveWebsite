@@ -92,11 +92,15 @@ function deleteStudent() {
       method: "DELETE",
    })
       .then((data) => {
-         if (data.message == "Student deleted") {
+         console.log(data)
+         if (data.status == 200) {
             loadStudents("api/students");
-            closePopup("editStudent");
+            closePopup("editStudent")
+            setTimeout(() => {
+               alert("Student deleted")
+            }, 200);
          } else {
-            alert("Something went wrong" + data.message);
+            alert("Something went wrong" + data.status);
          }
       })
 
