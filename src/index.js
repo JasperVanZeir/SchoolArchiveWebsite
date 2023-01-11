@@ -90,6 +90,10 @@ function viewStudentButton(data) {
 
 }
 
+function deleteStudent() {
+
+}
+
 function editStudent() {
    // Get the values from the form
    let first_name = document.getElementById("edit_first_name").value;
@@ -128,6 +132,11 @@ function editStudent() {
       .then((data) => {
          console.log("Success:", data);
          loadStudents("api/students");
+
+         let modal = document.getElementById('editStudent');
+         // Set the modal's display property to 'none' to hide it
+         modal.classList.add("hidden");
+
       })
       .catch((error) => {
          console.error("Error:", error);
