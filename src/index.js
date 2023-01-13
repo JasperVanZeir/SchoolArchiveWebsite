@@ -20,7 +20,9 @@ function loadStudents(endpoint) {
 
 function createStudentElement(student) {
    return `
-    <tr class="focus:outline-none h-14 bg-white border border-gray-100 text-gray-500 text-md font-medium hover:text-gray-800 hover:bg-gray-50" onclick="viewStudentButton(this)">
+    <tr class="focus:outline-none h-14 bg-white border border-gray-100 text-gray-500 text-md font-medium hover:text-gray-800 hover:bg-gray-50" data-student='${JSON.stringify(
+      student
+   )}' onclick="viewStudentButton(this)">
    <td>
       <div class="flex items-center pl-5">
          <p>${student.first_name} ${student.last_name}</p>
@@ -60,7 +62,8 @@ function createStudentElement(student) {
 }
 
 function editStudentButton(data) {
-   // opens modal
+   //put your code in here to be delayed by 2 seconds
+   closePopup("viewStudent")
    const addStudentModal = document.getElementById("editStudent");
    addStudentModal.classList.remove("hidden");
    addStudentModal.classList.add("flex");
@@ -77,13 +80,67 @@ function editStudentButton(data) {
    document.getElementById("edit_city").value = student.city;
    document.getElementById("edit_note").value = student.note;
    document.getElementById("edit_student_id").value = student.student_id;
+
 }
 
 function viewStudentButton(data) {
-   // opens modal
-   const addStudentModal = document.getElementById("viewStudent");
-   addStudentModal.classList.remove("hidden");
-   addStudentModal.classList.add("flex");
+      // opens modal
+      let course
+
+      const addStudentModal = document.getElementById("viewStudent");
+      addStudentModal.classList.remove("hidden");
+      addStudentModal.classList.add("flex");
+
+      const student = JSON.parse(data.getAttribute("data-student"));
+
+      let name = student.first_name + " " + student.last_name;
+
+      let color = document.getElementById("view_course");
+      color.classList.remove("bg-green-100");
+      color.classList.remove("text-green-800");
+      color.classList.remove("bg-blue-100");
+      color.classList.remove("text-blue-800");
+      color.classList.remove("bg-yellow-100");
+      color.classList.remove("text-yellow-800");
+      color.classList.remove("bg-purple-100");
+      color.classList.remove("text-purple-800");
+
+
+      switch (student.course) {
+         case "ITN":
+            course = "IT & Netwerken";
+
+            color.classList.add("bg-green-100");
+            color.classList.add("text-green-800");
+            break;
+         case "AIT":
+            course = "Accountancy & IT";
+
+            color.classList.add("bg-blue-100");
+            color.classList.add("text-blue-800");
+            break;
+         case "MO":
+            course = "Marketing & Ondernemen";
+            color.classList.add("bg-yellow-100");
+            color.classList.add("text-yellow-800");
+            break;
+         case "OMC":
+            course = "Office management & Communicatie";
+            color.classList.add("bg-purple-100");
+            color.classList.add("text-purple-800");
+            break;
+      }
+
+      document.getElementById("view_name").textContent = name;
+      document.getElementById("view_course").textContent = course;
+      document.getElementById("view_birthyear").textContent = student.birthyear;
+      document.getElementById("view_sex").textContent = student.sex;
+      document.getElementById("view_email").textContent = student.email;
+      document.getElementById("view_phone_number").textContent = student.phone_number;
+      document.getElementById("view_city").textContent = student.city;
+      document.getElementById("view_note").textContent = student.note;
+
+      document.getElementById("open-edit-button").setAttribute("data-student", JSON.stringify(student));
 }
 
 function deleteStudent() {
@@ -106,6 +163,7 @@ function deleteStudent() {
 
 
 }
+
 
 function editStudent() {
    // Get the values from the form

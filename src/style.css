@@ -5,6 +5,9 @@
 *{
     font-family: 'Poppins';
 }
+body{
+    overflow: hidden;
+}
 
 .bgCustomSidebarBlue{
     background-color: #6347ff;
@@ -111,3 +114,8 @@
 .CustomRed:hover{
     color: #fff;
 }
+
+
+  .customheight{
+      height: 600px;
+  }

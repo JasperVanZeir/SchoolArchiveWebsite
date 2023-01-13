@@ -374,7 +374,7 @@
                         Maak leerling
                      </button>
                   </div>
-                  <div class="mt-4 overflow-x-auto rounded-lg">
+                  <div class="mt-4 overflow-x-auto rounded-lg overflow-y-auto ">
                      <table class="w-full whitespace-nowrap">
                         <tr tabindex="0" class="focus:outline-none h-14 bgCustomSidebar border border-gray-100">
                            <td class="">
@@ -711,57 +711,52 @@
                   <form action="#">
                      <div class="grid gap-4 mb-4 sm:grid-cols-2">
                         <div>
-                           <h3 class="pb-1.5 text-lg font-medium leading-6 text-gray-900">Jasper Van Zeir</h3>
-                           <p class="pb-1.5 max-w-2xl text-sm text-gray-500">
-                              jasper.vanzeir@student.sintlievenscollege.be</p>
+                           <h3 id="view_name" class="pb-1.5 text-lg font-medium leading-6 text-gray-900"></h3>
+                           <p id="view_email" class="pb-1.5 max-w-2xl text-sm text-gray-500">
+                              </p>
 
                            <span
-                              class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">IT
-                              & Netwerken</span>
+                             id="view_course" class=" text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300"></span>
                         </div>
                         <img class="ml-auto h-20 rounded-xl" src="./ppjasper.png" alt="Large avatar">
                         <div>
                            <label for="first_name"
                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telefoon:</label>
                            <p
-                              class=" text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                              0490 19 85 84</p>
+                             id="view_phone_number" class=" text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                        </p>
                         </div>
                         <div>
                            <label for="first_name"
                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Woonplaats:</label>
                            <p
-                              class=" text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                              Goed ten Pauw 52, 9080 Lochristi</p>
+                             id="view_city" class=" text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                              </p>
                         </div>
                         <div>
                            <label for="first_name"
                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Geboortejaar:</label>
                            <p
-                              class=" text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                              2005</p>
+                             id="view_birthyear" class=" text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                              </p>
                         </div>
                         <div>
                            <label for="first_name"
                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Geslacht:</label>
                            <p
-                              class=" text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                              Man</p>
+                             id="view_sex" class=" text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                              </p>
                         </div>
                         <div class="sm:col-span-2">
                            <label for="note"
                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Notitie:</label>
                            <p
-                              class=" text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est, atque! Ipsa tempore
-                              laudantium vel accusantium reprehenderit cupiditate laboriosam. Autem earum eius
-                              consequuntur amet perferendis est aut sint veniam et ad aliquam aperiam consectetur,
-                              soluta quia ipsa, impedit laborum voluptatum totam nostrum suscipit. Facere alias
-                              doloremque cupiditate. Excepturi facilis incidunt tenetur?.</p>
+                             id="view_note" class=" text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                              </p>
                         </div>
                      </div>
                      <div class="flex items-center space-x-4">
-                        <button onclick="editStudent()" type="button" id="submit-button"
+                        <button onclick="editStudentButton(this)" type="button" id="open-edit-button"
                            class="text-white inline-flex items-center bgCustomSidebarBlue hover:bg-primary-800 font-medium rounded-lg text-md px-5 py-2 text-center">
                            <svg aria-hidden="true" class="mr-1 -ml-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                               xmlns="http://www.w3.org/2000/svg">
