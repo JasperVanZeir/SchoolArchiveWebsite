@@ -7,15 +7,16 @@ function elementFromHtml(html) {
 
 function loadStudents(endpoint) {
    removeContent();
-   fetch(`http://104.131.62.197/${endpoint}`)
+   fetch(`https://slcb.online/${endpoint}`)
       .then((response) => response.json())
       .then((data) => {
-         fetch("http://104.131.62.197/api/students/count")
+         fetch("https://slcb.online/api/students/count")
             .then((response) => response.json())
             .then((rcount) => {
                appendStudents(rcount, data);
             });
       });
+
 }
 
 function createStudentElement(student) {
@@ -62,7 +63,6 @@ function createStudentElement(student) {
 }
 
 function editStudentButton(data) {
-   //put your code in here to be delayed by 2 seconds
    closePopup("viewStudent")
    const addStudentModal = document.getElementById("editStudent");
    addStudentModal.classList.remove("hidden");
@@ -145,7 +145,7 @@ function viewStudentButton(data) {
 
 function deleteStudent() {
    let id = document.getElementById("edit_student_id").value;
-   fetch(`http://104.131.62.197/api/students/id/${id} `, {
+   fetch(`https://slcb.online/api/students/id/${id} `, {
       method: "DELETE",
    })
       .then((data) => {
@@ -192,7 +192,7 @@ function editStudent() {
    };
 
    // Send the student object to the server
-   fetch(`http://104.131.62.197/api/students/id/${id}`, {
+   fetch(`https://slcb.online/api/students/id/${id}`, {
       method: "PUT",
       headers: {
          "Content-Type": "application/json",
